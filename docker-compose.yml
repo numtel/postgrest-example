@@ -1,0 +1,38 @@
+services:
+  pg:
+    environment:
+      POSTGRES_USER: postgrest
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    image: postgres:9.5
+    ports:
+      - 5432:5432
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+  pgrest:
+    environment:
+      POSTGREST_JWT_SECRET: whatisthispass
+      POSTGREST_SCHEMA: public
+      POSTGREST_ANONYMOUS: anon
+      POSTGREST_POOL: 200
+      POSTGREST_MAX_ROWS: 10000
+      PG_ENV_POSTGRES_USER: postgrest
+      PG_ENV_POSTGRES_PASSWORD: test
+      PG_ENV_POSTGRES_DB: test
+      PG_PORT_5432_TCP_ADDR: pg
+      PG_PORT_5432_TCP_PORT: 5432
+    image: begriffs/postgrest:latest
+    ports:
+      - 3000:3000
+    links:
+      - pg:pg
+  events:
+    build: ./events
+    command: postgresql://postgrest:test@pg:5432/test
+    links:
+      - pg:pg
+  frontend:
+    build: .
+    ports:
+      - 80:80
+version: '2'
