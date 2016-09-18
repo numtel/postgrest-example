@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <title>Postgrest Example</title>
 <body>
-<script src="api.js"></script>
-<script src="htmlEscape.js"></script>
-<script src="app.js"></script>
+<script src="ApiServer.js"></script>
+<script src="Component.js"></script>
+<script src="Dialog.js"></script>
+<script src="ComponentWithModal.js"></script>
+<script src="BlogApp.js"></script>
+<script>
+const app = new BlogApp('http://localhost:3000');
+document.body.appendChild(app.element);
+
+const debug = promise => promise
+  .then(result=>console.log(result))
+  .catch(reason=>console.error(reason));
+
+// debug(app.server.signup('you@example.com','super_secret'))
+// debug(app.server.validateEmail('you@example.com','from the events log'))
+// debug(app.server.login('you@example.com','super_secret'))
+// debug(app.server.createPost('hello, world!','oldest trick in the book'))
+// debug(app.server.getPosts())
+// debug(app.server.updatePost(1, 'worm', 'not always'))
+// debug(app.server.deletePost(1))
+
+</script>

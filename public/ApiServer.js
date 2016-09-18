@@ -1,4 +1,4 @@
-
+'use strict';
 class ApiServer {
   constructor(url) {
     this.url = url || '';
