@@ -1,0 +1,55 @@
+body {
+  font-family: sans-serif;
+}
+
+.blog {
+}
+.blog ul {
+}
+.blog li {
+}
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.dialog form {
+  width: 50%;
+  max-width: 500px;
+  min-width: 240px;
+  box-shadow: 0px 0px 119px -5px rgba(0,0,0,0.75);
+  background: #f5f5f5;
+  padding: 8px;
+  animation: fadein 0.3s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; margin-top: -100px; }
+    to   { opacity: 1; margin-top: 0; }
+}
+
+.dialog .title {
+  display: block;
+  font-size: 120%;
+  font-weight: bold;
+  border-bottom: 1px solid #ccc;
+}
+.dialog label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+.dialog input {
+  width: 70%;
+}
+.dialog .submit {
+}
+.dialog .cancel {
+}

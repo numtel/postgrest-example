@@ -14,7 +14,7 @@ class ComponentWithModal extends Component {
   promptModal(options) {
     return new Promise((resolve, reject) => {
       if(this.modalDialog) {
-        reject(new Error('EXISTING_MODAL'));
+        reject(new ModalClosed('EXISTING_MODAL'));
         return;
       }
 
@@ -23,9 +23,10 @@ class ComponentWithModal extends Component {
           resolve(data);
           this.closeModal();
         },
-        onCancel: () => {
-          reject(new Error('CANCEL'));
-          this.closeModal()
+        onClose: () => {
+          this.closeModal();
+          if(options.fields) reject(new ModalClosed());
+          else resolve();
         }
       }), this.global);
 
@@ -33,3 +34,5 @@ class ComponentWithModal extends Component {
     });
   }
 }
+
+class ModalClosed extends Error {}
