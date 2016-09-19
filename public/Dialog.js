@@ -13,10 +13,17 @@ class Dialog extends Component {
       return this.html`
         <label>
           <span>$${field.label || fieldName}</span>
-          <input
-            name="$${fieldName}"
-            type="$${field.type || 'text'}"
-            />
+          ${field.type === 'textarea' ? this.html`
+            <textarea
+              name="$${fieldName}"
+              />$${field.value ? field.value : ''}</textarea>
+            ` : this.html`
+            <input
+              name="$${fieldName}"
+              type="$${field.type || 'text'}"
+              value="$${field.value ? field.value : ''}"
+              />
+            `}
         </label>
       `;
     });
@@ -39,7 +46,7 @@ class Dialog extends Component {
       .addEventListener('submit', event => {
         event.preventDefault();
         const fields = Object.keys(this.options.fields).reduce((obj, fieldName) => {
-          const fieldInput = this.element.querySelector(`input[name=${fieldName}]`);
+          const fieldInput = this.element.querySelector(`[name=${fieldName}]`);
           obj[fieldName] = fieldInput.value;
           return obj;
         }, {});

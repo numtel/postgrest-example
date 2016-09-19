@@ -46,7 +46,8 @@ body {
   justify-content: space-between;
   padding: 5px;
 }
-.dialog input {
+.dialog input,
+.dialog textarea {
   width: 70%;
 }
 .dialog .submit {

@@ -38,7 +38,7 @@ class ApiServer {
   }
   // Blog reading
   getPosts() {
-    return this._request('GET', '/posts')
+    return this._request('GET', '/posts?order=id.desc')
       .then(result => {
         if(!result.ok)
           throw result;
